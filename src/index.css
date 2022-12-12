@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  font-family: "Space Grotesk";
+  user-select: none;
+}
+
+.logo {
+  font-family: "Baby Kruffy", "Space Grotesk" !important;
+}
+
+html {
+  background-color: #1e1e1e;
+}
