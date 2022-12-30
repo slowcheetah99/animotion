@@ -1,7 +1,7 @@
 import { Header, Body, BottomNav } from "../containers";
 import { motion } from "framer-motion";
 import { pageTransition } from "../constants/framerVariants";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useGetAnimeQuery } from "../services/animeDB";
 export default function Home({ setOpen }) {
@@ -14,18 +14,19 @@ export default function Home({ setOpen }) {
     page,
     type,
     searchQuery,
+    status,
   });
 
   if (isFetching)
     return (
-      <div>
+      <div className="absolute too-0 left-0 w-full h-full text-3xl text-slate-100">
         <h1>Loading</h1>
       </div>
     );
 
   if (!data.data.length) {
     return (
-      <div>
+      <div className="absolute too-0 left-0 w-full h-full text-3xl text-slate-100">
         <h2>No anime...Try again later</h2>
       </div>
     );

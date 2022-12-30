@@ -23,6 +23,7 @@ export default function Anime({ open, setOpen }) {
     page: "1",
     type,
     searchQuery,
+    status: "",
   });
 
   if (isFetching) {

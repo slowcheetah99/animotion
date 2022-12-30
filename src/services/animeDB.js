@@ -15,7 +15,8 @@ export const animeDB = createApi({
   }),
   endpoints: (builder) => ({
     getAnime: builder.query({
-      query: ({ genreIdOrCategoryName, page, type, searchQuery }) => {
+      query: ({ genreIdOrCategoryName, page, type, searchQuery, status }) => {
+        console.log(status);
         //get anime by search
         if (searchQuery) {
           return {
@@ -37,6 +38,19 @@ export const animeDB = createApi({
               page: page,
               size: "48",
               search: `${type}`,
+              sortBy: "ranking",
+              sortOrder: "asc",
+            },
+          };
+        }
+        //get anime by category most popular | airing | Upcoming
+        else if (status) {
+          return {
+            url: "/anime",
+            params: {
+              page: page,
+              size: "48",
+              hasEpisode: `${status}`,
               sortBy: "ranking",
               sortOrder: "asc",
             },

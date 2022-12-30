@@ -2,6 +2,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { searchAnime } from "../features/currentGenreOrCategory";
 import { useDispatch } from "react-redux";
 import kebabCase from "lodash.kebabcase";
+import { Types } from "./";
 export default function FeaturedAnime({ anime, similarAnime }) {
   const location = useLocation();
   const navigate = useNavigate();
@@ -65,6 +66,7 @@ export default function FeaturedAnime({ anime, similarAnime }) {
           Read More
         </button>
       )}
+      <Types />
     </div>
   );
 }

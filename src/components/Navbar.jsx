@@ -5,7 +5,8 @@ import { motion } from "framer-motion";
 import { FiMenu as Menu } from "react-icons/fi";
 import logo from "../assets/logo.svg";
 import { useDispatch } from "react-redux";
-import { searchAnime } from "../features/currentGenreOrCategory";
+import { searchAnime, selectStatus } from "../features/currentGenreOrCategory";
+import { useState } from "react";
 
 const fadeIn = {
   initial: {
@@ -29,9 +30,18 @@ const fadeIn = {
     },
   },
 };
+
+const categories = ["Most Popular", "Aired", "Upcoming"];
 export default function Navbar({ setOpen }) {
   const today = moment().format("dddd, MMMM Do");
   const dispatch = useDispatch();
+  const [query, setQuery] = useState("");
+  function handleKeyDown(e) {
+    if (e.key === "Enter") {
+      dispatch(searchAnime(query));
+    }
+  }
+
   return (
     <motion.div
       className="w-full h-fit py-4 text-slate-100 flex justify-between items-center"
@@ -61,14 +71,35 @@ export default function Navbar({ setOpen }) {
         <p className="text-base hidden ml-4 md:inline">{today}</p>
       </div>
 
-      <div className="w-fit h-fit hidden md:flex gap-x-4">
-        <p className="font-bold">Most Popular</p>
-        <p>Upcoming</p>
-        <p>Airing</p>
-      </div>
+      {/* <div className="w-fit h-fit hidden md:flex gap-x-4">
+        {categories.map((category, i) => (
+          <p
+            className="hover:font-bold transition-all cursor-pointer"
+            key={i}
+            onClick={() => {
+              if (category === "Most Popular") {
+                return dispatch(selectStatus(""));
+              } else if (category === "Aired") {
+                return dispatch(selectStatus(true));
+              }
+              return dispatch(selectStatus(false));
+            }}
+          >
+            {category}
+          </p>
+        ))}
+      </div> */}
 
-      <div>
-        <Search className="text-slate-100 text-2xl" />
+      <div className="relative w-4/12 h-12" onKeyDown={handleKeyDown}>
+        <Search className="text-slate-100 text-2xl absolute right-4 bottom-3" />
+        <input
+          type="search"
+          className="h-full py-2 px-2 text-base rounded-sm absolute top-0 left-0 w-full bg-transparent border-b-2 border-primary transition-all"
+          value={query}
+          onChange={(e) => {
+            setQuery(e.target.value);
+          }}
+        />
       </div>
     </motion.div>
   );

@@ -7,12 +7,14 @@ export const genreOrCategory = createSlice({
     type: "",
     page: 1,
     searchQuery: "",
+    status: "",
   },
   reducers: {
     selectGenreOrCategory: (state, action) => {
       state.genreIdOrCategoryName = action.payload;
       state.searchQuery = "";
       state.type = "";
+      state.status = "";
     },
     searchAnime: (state, action) => {
       state.searchQuery = action.payload;
@@ -20,10 +22,13 @@ export const genreOrCategory = createSlice({
     selectType: (state, action) => {
       state.type = action.payload;
     },
+    selectStatus: (state, action) => {
+      state.status = action.payload;
+    },
   },
 });
 
-export const { selectGenreOrCategory, selectType, searchAnime } =
+export const { selectGenreOrCategory, selectType, searchAnime, selectStatus } =
   genreOrCategory.actions;
 
 export default genreOrCategory.reducer;
